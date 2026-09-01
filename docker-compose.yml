@@ -1,0 +1,11 @@
+services:
+  bianca:
+    build:
+      context: .
+      args:
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY}
+    container_name: bianca-personal-asistent
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:4173:80"
