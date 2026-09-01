@@ -12,3 +12,19 @@ export async function getBiancaTaskResults(){if(!supabase)return[];const{data,er
 export async function snoozeAttention(taskId:string,minutes=60){if(!supabase)throw new Error('Supabase nu este configurat');const{error}=await supabase.rpc('snooze_bianca_attention',{p_task_id:taskId,p_minutes:minutes});if(error)throw error}
 export async function decideApproval(id:string,status:'approved'|'rejected'|'revision_requested'){if(!supabase)throw new Error('Supabase nu este configurat');const{data,error}=await supabase.rpc('decide_bianca_approval',{p_id:id,p_status:status});if(error)throw error;return data}
 export async function submitMessage(message:string,agent='personal_assistant'){if(!supabase)throw new Error('Supabase nu este configurat');const{data,error}=await supabase.rpc('submit_bianca_message',{p_message:message,p_agent:agent});if(error)throw error;return data as string}
+export async function uploadBiancaFiles(files:File[],message='',agent='personal_assistant'){
+  if(!supabase)throw new Error('Supabase nu este configurat')
+  const session=(await supabase.auth.getSession()).data.session
+  if(!session)throw new Error('Autentificare necesară')
+  const out:any[]=[]
+  for(const file of files){
+    const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_')
+    const path=`${session.user.id}/${Date.now()}-${crypto.randomUUID()}-${safe}`
+    const{error:upErr}=await supabase.storage.from('bianca-files').upload(path,file,{contentType:file.type||undefined,upsert:false})
+    if(upErr)throw upErr
+    const{data,error}=await supabase.rpc('register_bianca_upload',{p_path:path,p_name:file.name,p_mime:file.type||'application/octet-stream',p_size:file.size,p_message:message,p_agent:agent})
+    if(error)throw error
+    out.push({task_id:data,path,name:file.name})
+  }
+  return out
+}
