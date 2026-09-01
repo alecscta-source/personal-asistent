@@ -1,38 +1,11 @@
 import { supabase } from './supabase'
 
-export type BiancaUiState = {
-  attention: any[]
-  agents: any[]
-  tasks: any[]
-  approvals: any[]
-  calendar: any[]
-  promises: any[]
-}
-
-const emptyState: BiancaUiState = { attention: [], agents: [], tasks: [], approvals: [], calendar: [], promises: [] }
-
-export async function getBiancaUiState(): Promise<BiancaUiState> {
-  if (!supabase) return emptyState
-  const { data, error } = await supabase.rpc('get_bianca_ui_state')
-  if (error) {
-    console.error('Bianca UI state:', error.message)
-    return emptyState
-  }
-  return { ...emptyState, ...(data ?? {}) }
-}
-
-export async function getDashboardData() {
-  const state = await getBiancaUiState()
-  return { tasks: state.tasks, approvals: state.approvals, events: state.calendar, promises: state.promises, notifications: state.attention, agents: state.agents }
-}
-
-export async function getTaskResults(taskId: string) {
-  if (!supabase) return []
-  const { data } = await supabase.from('agent_jobs').select('id,agent_name,job_type,status,result_payload,error_text,created_at,completed_at').eq('task_id', taskId).order('created_at', { ascending: true })
-  return data ?? []
-}
-
-export async function decideApproval(id: string, status: 'approved' | 'rejected' | 'revision_requested') {
-  if (!supabase) throw new Error('Supabase is not configured')
-  return supabase.from('approval_requests').update({ status, decided_at: new Date().toISOString() }).eq('id', id).select().single()
-}
+export type BiancaUiState={attention:any[];agents:any[];tasks:any[];approvals:any[];calendar:any[];promises:any[]}
+export const emptyState:BiancaUiState={attention:[],agents:[],tasks:[],approvals:[],calendar:[],promises:[]}
+export async function getSession(){if(!supabase)return null;return (await supabase.auth.getSession()).data.session}
+export async function sendLoginLink(email:string){if(!supabase)throw new Error('Supabase nu este configurat');return supabase.auth.signInWithOtp({email,options:{emailRedirectTo:window.location.origin}})}
+export async function signOut(){return supabase?.auth.signOut()}
+export function onAuthChange(cb:()=>void){return supabase?.auth.onAuthStateChange(()=>cb())}
+export async function getBiancaUiState():Promise<BiancaUiState>{if(!supabase)return emptyState;const{data,error}=await supabase.rpc('get_bianca_ui_state');if(error){console.error('Bianca UI state:',error.message);return emptyState}return{...emptyState,...(data??{})}}
+export async function snoozeAttention(taskId:string,minutes=60){if(!supabase)throw new Error('Supabase nu este configurat');const{error}=await supabase.rpc('snooze_bianca_attention',{p_task_id:taskId,p_minutes:minutes});if(error)throw error}
+export async function decideApproval(id:string,status:'approved'|'rejected'|'revision_requested'){if(!supabase)throw new Error('Supabase nu este configurat');const{data,error}=await supabase.rpc('decide_bianca_approval',{p_id:id,p_status:status});if(error)throw error;return data}
