@@ -8,6 +8,10 @@ export async function signOut(){return supabase?.auth.signOut()}
 export function onAuthChange(cb:()=>void){return supabase?.auth.onAuthStateChange(()=>cb())}
 export async function getPrincipalContext():Promise<PrincipalContext>{if(!supabase)return{};const{data,error}=await supabase.rpc('current_principal_context');if(error)throw error;return(data??{})as PrincipalContext}
 export async function getBiancaUiState():Promise<BiancaUiState>{if(!supabase)return emptyState;const{data,error}=await supabase.rpc('get_bianca_ui_state');if(error)throw error;return{...emptyState,...(data??{})}}
+export async function getBiancaMailInbox(limit=20){if(!supabase)return[];const{data,error}=await supabase.rpc('get_bianca_mail_inbox',{p_limit:limit});if(error)throw error;return(data??[])as any[]}
+export async function markMailRead(mailId:string){if(!supabase)throw new Error('Supabase nu este configurat');const{data,error}=await supabase.rpc('owner_read_mail',{p_mail_id:mailId});if(error)throw error;return data}
+export async function snoozeMail(mailId:string,minutes=60){if(!supabase)throw new Error('Supabase nu este configurat');const{error}=await supabase.rpc('snooze_bianca_mail',{p_mail_id:mailId,p_minutes:minutes});if(error)throw error}
+export async function dismissMail(mailId:string){if(!supabase)throw new Error('Supabase nu este configurat');const{error}=await supabase.rpc('dismiss_bianca_mail',{p_mail_id:mailId});if(error)throw error}
 export async function getBiancaTaskResults(){if(!supabase)return[];const{data,error}=await supabase.rpc('get_bianca_task_results');if(error)throw error;return(data??[])as any[]}
 export async function getBiancaRecentDecisions(){if(!supabase)return[];const{data,error}=await supabase.rpc('get_bianca_recent_decisions');if(error)throw error;return(data??[])as any[]}
 export async function getBiancaTaskTimeline(taskId:string){if(!supabase)return{};const{data,error}=await supabase.rpc('get_bianca_task_timeline',{p_task_id:taskId});if(error)throw error;return(data??{})as any}
