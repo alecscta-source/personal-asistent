@@ -13,13 +13,28 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Check VPS credentials
+        id: preflight
+        shell: bash
+        env:
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+        run: |
+          if [ -z "$VPS_USER" ] || [ -z "$VPS_SSH_KEY" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "VPS deployment skipped: VPS_USER and/or VPS_SSH_KEY are not configured yet."
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Deploy to VPS
+        if: steps.preflight.outputs.ready == 'true'
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.VPS_HOST }}
+          host: 185.246.122.152
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_PORT || 22 }}
+          port: 22
           script_stop: true
           script: |
             set -e
@@ -32,8 +47,8 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             cat > .env <<'EOF'
-            VITE_SUPABASE_URL=${{ secrets.VITE_SUPABASE_URL }}
-            VITE_SUPABASE_ANON_KEY=${{ secrets.VITE_SUPABASE_ANON_KEY }}
+            VITE_SUPABASE_URL=https://qhremmecmiilsppjnjnc.supabase.co
+            VITE_SUPABASE_ANON_KEY=sb_publishable_LjodWbNN4jLidMUiGdD67g_wKSLGt3O
             EOF
             docker compose up -d --build --remove-orphans
             docker image prune -f
