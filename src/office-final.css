@@ -13,12 +13,13 @@
 .desk-tools button:nth-child(5){display:block!important;left:50%!important;top:74%!important;width:16%!important;height:15%!important}
 .desk-tools button:nth-child(6){display:block!important;left:70%!important;top:74%!important;width:18%!important;height:15%!important}
 .desk-tools button:focus-visible{opacity:1!important;outline:2px solid #d8a45c!important;outline-offset:-3px!important}
-.bianca-hotspot{z-index:8!important;left:22%!important;top:23%!important;width:39%!important;height:34%!important;background:transparent!important;border:0!important;color:transparent!important;box-shadow:none!important}
+/* Existing Bianca button also covers the visible bottom chat bar; higher-z desk/notices keep their own actions. */
+.bianca-hotspot{z-index:8!important;left:5%!important;top:23%!important;width:90%!important;height:73%!important;background:transparent!important;border:0!important;color:transparent!important;box-shadow:none!important}
 .bianca-hotspot span,.bianca-hotspot small{display:none!important}
 .notice-stack,.lux-office .mail-notice-stack{z-index:15!important;top:7%!important;right:2.5%!important;width:min(360px,26vw)!important;max-height:55dvh!important;overflow:auto!important;background:linear-gradient(180deg,rgba(10,10,10,.985),rgba(10,10,10,.985))!important}
 @media(max-width:900px){
  .lux-office{background-image:url('/bianca-office-mobile-final.jpg')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
- .bianca-hotspot{left:16%!important;top:24%!important;width:50%!important;height:31%!important}
+ .bianca-hotspot{left:4%!important;top:23%!important;width:92%!important;height:74%!important}
  .notice-stack,.lux-office .mail-notice-stack{top:6.5%!important;right:3%!important;width:37vw!important;max-width:none!important;max-height:39dvh!important;padding:38px 7px 7px!important;gap:6px!important;border-radius:14px!important;background:rgba(10,10,10,.99)!important}
  .notice-stack:before,.lux-office .mail-notice-stack:before{top:11px!important;left:11px!important;font-size:.84rem!important}
  .lux-office .mail-notice{min-height:0!important;padding:8px!important;border-radius:11px!important}
