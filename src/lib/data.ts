@@ -7,8 +7,16 @@ export async function signInWithPassword(email:string,password:string){
  if(!supabase)return{data:{user:null,session:null},error:new Error('Supabase nu este configurat în acest deployment. Verifică VITE_SUPABASE_URL și VITE_SUPABASE_ANON_KEY în Vercel și redeploy.')}
  try{return await supabase.auth.signInWithPassword({email,password})}catch(err:any){return{data:{user:null,session:null},error:err instanceof Error?err:new Error(String(err||'Eroare necunoscută la autentificare'))}}
 }
+export async function requestPasswordReset(email:string){
+ if(!supabase)return{data:{},error:new Error('Supabase nu este configurat în acest deployment.')}
+ try{return await supabase.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin})}catch(err:any){return{data:{},error:err instanceof Error?err:new Error(String(err||'Eroare necunoscută la resetarea parolei'))}}
+}
+export async function updatePassword(password:string){
+ if(!supabase)return{data:{user:null},error:new Error('Supabase nu este configurat în acest deployment.')}
+ try{return await supabase.auth.updateUser({password})}catch(err:any){return{data:{user:null},error:err instanceof Error?err:new Error(String(err||'Eroare necunoscută la setarea parolei'))}}
+}
 export async function signOut(){return supabase?.auth.signOut()}
-export function onAuthChange(cb:()=>void){return supabase?.auth.onAuthStateChange(()=>cb())}
+export function onAuthChange(cb:(event?:string,session?:any)=>void){return supabase?.auth.onAuthStateChange((event,session)=>cb(event,session))}
 export async function getPrincipalContext():Promise<PrincipalContext>{if(!supabase)return{};const{data,error}=await supabase.rpc('current_principal_context');if(error)throw error;return(data??{})as PrincipalContext}
 export async function getBiancaUiState():Promise<BiancaUiState>{if(!supabase)return emptyState;const{data,error}=await supabase.rpc('get_bianca_ui_state');if(error)throw error;return{...emptyState,...(data??{})}}
 export async function getBiancaMailInbox(limit=20){if(!supabase)return[];const{data,error}=await supabase.rpc('get_bianca_mail_inbox',{p_limit:limit});if(error)throw error;return(data??[])as any[]}
