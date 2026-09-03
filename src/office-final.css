@@ -1,0 +1,45 @@
+/* HOME final visual layer — preserve backend and existing secondary pages. */
+
+/* Home is the office itself: no legacy navigation/chrome. */
+.app-shell:has(.office-v2){display:block!important;width:100vw!important;min-height:100dvh!important;overflow:hidden!important}
+.app-shell:has(.office-v2)>.sidebar,.app-shell:has(.office-v2)>.mobile-nav,.main-panel:has(.office-v2)>.topbar{display:none!important}
+.main-panel:has(.office-v2),.office-v2{margin:0!important;padding:0!important;width:100vw!important;min-height:100dvh!important;background:#050403!important}
+.lux-office{position:relative!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:#080604 url('/bianca-office-final.webp') center/cover no-repeat!important}
+
+/* The real agenda/calendar in the scene are the navigation controls. */
+.desk-tools{display:contents!important}
+.desk-tools button{position:absolute!important;z-index:12!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:transparent!important;overflow:hidden!important;min-width:0!important;min-height:0!important;border-radius:18px!important;opacity:0!important;cursor:pointer!important;transform:none!important}
+.desk-tools button:before,.desk-tools button:after,.desk-tools button svg,.desk-tools button span{display:none!important}
+/* agenda physical book */
+.desk-tools button:nth-child(1){display:block!important;left:20%!important;top:50%!important;width:31%!important;height:20%!important}
+/* calendar physical object */
+.desk-tools button:nth-child(2){display:block!important;left:59%!important;top:48%!important;width:19%!important;height:19%!important}
+/* artistic objects already painted into the scene */
+.desk-tools button:nth-child(3){display:block!important;left:8%!important;top:74%!important;width:17%!important;height:15%!important}
+.desk-tools button:nth-child(4){display:block!important;left:29%!important;top:74%!important;width:17%!important;height:15%!important}
+.desk-tools button:nth-child(5){display:block!important;left:50%!important;top:74%!important;width:16%!important;height:15%!important}
+.desk-tools button:nth-child(6){display:block!important;left:70%!important;top:74%!important;width:18%!important;height:15%!important}
+.desk-tools button:focus-visible{opacity:1!important;outline:2px solid #d8a45c!important;outline-offset:-3px!important}
+
+/* Bianca remains directly clickable without a software card. */
+.bianca-hotspot{z-index:8!important;left:24%!important;top:24%!important;width:35%!important;height:31%!important;background:transparent!important;border:0!important;color:transparent!important;box-shadow:none!important}
+.bianca-hotspot span,.bianca-hotspot small{display:none!important}
+
+/* Live notifications only; maximum three is already enforced by Office mailInbox.slice(0,3). */
+.notice-stack,.lux-office .mail-notice-stack{z-index:15!important;top:7%!important;right:2.5%!important;width:min(360px,26vw)!important;max-height:55dvh!important;overflow:auto!important}
+
+@media(max-width:900px){
+ .lux-office{background-image:url('/bianca-office-mobile-final.webp')!important;background-position:center center!important;background-size:cover!important}
+ .bianca-hotspot{left:18%!important;top:24%!important;width:48%!important;height:29%!important}
+ .notice-stack,.lux-office .mail-notice-stack{top:6.5%!important;right:3%!important;width:46vw!important;max-width:none!important;max-height:36dvh!important;padding:40px 7px 7px!important;gap:6px!important;border-radius:14px!important}
+ .notice-stack:before,.lux-office .mail-notice-stack:before{top:11px!important;left:11px!important;font-size:.84rem!important}
+ .lux-office .mail-notice{min-height:0!important;padding:8px!important;border-radius:11px!important}
+ .mail-one-line{gap:6px!important}.mail-one-line svg{width:15px!important;height:15px!important}.mail-one-line strong{font-size:.63rem!important;line-height:1.22!important}
+ /* coordinates correspond to the portrait composition */
+ .desk-tools button:nth-child(1){left:18%!important;top:51%!important;width:45%!important;height:18%!important}
+ .desk-tools button:nth-child(2){left:63%!important;top:48%!important;width:29%!important;height:17%!important}
+ .desk-tools button:nth-child(3){left:5%!important;top:72%!important;width:22%!important;height:14%!important}
+ .desk-tools button:nth-child(4){left:28%!important;top:72%!important;width:22%!important;height:14%!important}
+ .desk-tools button:nth-child(5){left:50%!important;top:72%!important;width:21%!important;height:14%!important}
+ .desk-tools button:nth-child(6){left:72%!important;top:72%!important;width:23%!important;height:14%!important}
+}
