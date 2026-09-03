@@ -3,7 +3,7 @@ export type BiancaUiState={attention:any[];agents:any[];tasks:any[];approvals:an
 export type PrincipalContext={user_id?:string;display_name?:string;email?:string;founder_of?:string;specialization?:string;companies?:any[]}
 export const emptyState:BiancaUiState={attention:[],agents:[],tasks:[],approvals:[],calendar:[],promises:[]}
 export async function getSession(){if(!supabase)return null;return (await supabase.auth.getSession()).data.session}
-export async function sendLoginLink(email:string){if(!supabase)throw new Error('Supabase nu este configurat');return supabase.auth.signInWithOtp({email,options:{emailRedirectTo:window.location.origin}})}
+export async function sendLoginLink(email:string){if(!supabase)return{data:{user:null,session:null},error:new Error('Supabase nu este configurat în acest deployment. Verifică VITE_SUPABASE_URL și VITE_SUPABASE_ANON_KEY în Vercel și redeploy.')};try{return await supabase.auth.signInWithOtp({email,options:{emailRedirectTo:window.location.origin}})}catch(err:any){return{data:{user:null,session:null},error:err instanceof Error?err:new Error(String(err||'Eroare necunoscută la autentificare'))}}}
 export async function signOut(){return supabase?.auth.signOut()}
 export function onAuthChange(cb:()=>void){return supabase?.auth.onAuthStateChange(()=>cb())}
 export async function getPrincipalContext():Promise<PrincipalContext>{if(!supabase)return{};const{data,error}=await supabase.rpc('current_principal_context');if(error)throw error;return(data??{})as PrincipalContext}
