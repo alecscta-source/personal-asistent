@@ -1,0 +1,13 @@
+.agent-avatar{background-image:url('/team-portraits-v2.svg')!important;background-repeat:no-repeat!important;background-size:1100% 100%!important;background-color:#17130f!important;border:1px solid rgba(221,180,126,.2)!important;border-radius:22px!important;width:88px!important;height:118px!important;flex:0 0 88px!important;box-shadow:0 14px 30px rgba(0,0,0,.38)!important}
+.agent-card[data-agent='personal_assistant'] .agent-avatar{background-position:0 0!important}
+.agent-card[data-agent='secretara'] .agent-avatar{background-position:10% 0!important}
+.agent-card[data-agent='inginer'] .agent-avatar{background-position:20% 0!important}
+.agent-card[data-agent='vlad_instalatii'] .agent-avatar{background-position:30% 0!important}
+.agent-card[data-agent='sorin_tratare'] .agent-avatar{background-position:40% 0!important}
+.agent-card[data-agent='catalin_sauna_hammam'] .agent-avatar{background-position:50% 0!important}
+.agent-card[data-agent='radu_constructii'] .agent-avatar{background-position:60% 0!important}
+.agent-card[data-agent='elena_normative'] .agent-avatar{background-position:70% 0!important}
+.agent-card[data-agent='economist'] .agent-avatar{background-position:80% 0!important}
+.agent-card[data-agent='contabil'] .agent-avatar{background-position:90% 0!important}
+.agent-card[data-agent='marketing'] .agent-avatar{background-position:100% 0!important}
+@media(max-width:900px){.agent-avatar{width:76px!important;height:102px!important;flex-basis:76px!important}}
