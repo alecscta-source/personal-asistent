@@ -6,6 +6,7 @@ import './extra.css'
 import './visual-v2.css'
 import './team-v2.css'
 import './pages-v2.css'
+import './office-final.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
