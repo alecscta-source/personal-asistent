@@ -2,7 +2,7 @@
 .app-shell:has(.office-v2){display:block!important;width:100vw!important;min-height:100dvh!important;overflow:hidden!important}
 .app-shell:has(.office-v2)>.sidebar,.app-shell:has(.office-v2)>.mobile-nav,.main-panel:has(.office-v2)>.topbar{display:none!important}
 .main-panel:has(.office-v2),.office-v2{margin:0!important;padding:0!important;width:100vw!important;min-height:100dvh!important;background:#050403!important}
-.lux-office{position:relative!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;border:0!important;border-radius:0!important;box-shadow:none!important;background-color:#080604!important;background-image:url('/bianca-office-mobile-final.jpg'),url('/bianca-office-mobile-final.jpg')!important;background-position:center center,center center!important;background-repeat:no-repeat,no-repeat!important;background-size:contain,cover!important}
+.lux-office{position:relative!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;border:0!important;border-radius:0!important;box-shadow:none!important;background-color:#080604!important;background-image:url('/bianca-office-mobile-final.jpg')!important;background-position:center center!important;background-repeat:no-repeat!important;background-size:contain!important}
 .desk-tools{display:contents!important}
 .desk-tools button{position:absolute!important;z-index:12!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:transparent!important;overflow:hidden!important;min-width:0!important;min-height:0!important;border-radius:18px!important;opacity:0!important;cursor:pointer!important;transform:none!important}
 .desk-tools button:before,.desk-tools button:after,.desk-tools button svg,.desk-tools button span{display:none!important}
@@ -30,4 +30,9 @@
  .desk-tools button:nth-child(4){left:27%!important;top:72%!important;width:23%!important;height:14%!important}
  .desk-tools button:nth-child(5){left:50%!important;top:72%!important;width:22%!important;height:14%!important}
  .desk-tools button:nth-child(6){left:72%!important;top:72%!important;width:24%!important;height:14%!important}
+}
+@media(max-width:900px) and (orientation:landscape){
+ .lux-office{background-image:none!important;background:#080604!important}
+ .lux-office>*{visibility:hidden!important;pointer-events:none!important}
+ .lux-office:after{content:'Rotește telefonul vertical.';position:absolute!important;inset:0!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:24px!important;text-align:center!important;color:#e5c487!important;background:#080604!important;font-size:clamp(1.2rem,4vw,2rem)!important;font-weight:600!important;letter-spacing:.02em!important;z-index:999!important;visibility:visible!important}
 }
