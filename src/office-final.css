@@ -2,21 +2,21 @@
 .app-shell:has(.office-v2){display:block!important;width:100vw!important;min-height:100dvh!important;overflow:hidden!important}
 .app-shell:has(.office-v2)>.sidebar,.app-shell:has(.office-v2)>.mobile-nav,.main-panel:has(.office-v2)>.topbar{display:none!important}
 .main-panel:has(.office-v2),.office-v2{margin:0!important;padding:0!important;width:100vw!important;min-height:100dvh!important;background:#050403!important}
-.lux-office{position:relative!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;border:0!important;border-radius:0!important;box-shadow:none!important;background-color:#080604!important;background-image:url('/bianca-office-mobile-final.jpg')!important;background-position:center center!important;background-repeat:no-repeat!important;background-size:contain!important}
+.lux-office{position:relative!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;border:0!important;border-radius:0!important;box-shadow:none!important;background-color:#080604!important;background-image:url('/bianca-office-desktop-final.png.png')!important;background-position:center center!important;background-repeat:no-repeat!important;background-size:cover!important}
 .desk-tools{display:contents!important}
 .desk-tools button{position:absolute!important;z-index:12!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:transparent!important;overflow:hidden!important;min-width:0!important;min-height:0!important;border-radius:18px!important;opacity:0!important;cursor:pointer!important;transform:none!important}
 .desk-tools button:before,.desk-tools button:after,.desk-tools button svg,.desk-tools button span{display:none!important}
-.desk-tools button:nth-child(1){display:block!important;left:20%!important;top:50%!important;width:31%!important;height:20%!important}
-.desk-tools button:nth-child(2){display:block!important;left:59%!important;top:48%!important;width:19%!important;height:19%!important}
-.desk-tools button:nth-child(3){display:block!important;left:8%!important;top:74%!important;width:17%!important;height:15%!important}
-.desk-tools button:nth-child(4){display:block!important;left:29%!important;top:74%!important;width:17%!important;height:15%!important}
-.desk-tools button:nth-child(5){display:block!important;left:50%!important;top:74%!important;width:16%!important;height:15%!important}
-.desk-tools button:nth-child(6){display:block!important;left:70%!important;top:74%!important;width:18%!important;height:15%!important}
+.desk-tools button:nth-child(1){display:block!important;left:27%!important;top:57%!important;width:27%!important;height:20%!important}
+.desk-tools button:nth-child(2){display:block!important;left:56%!important;top:53%!important;width:13%!important;height:20%!important}
+.desk-tools button:nth-child(3){display:block!important;left:29%!important;top:75%!important;width:9%!important;height:14%!important}
+.desk-tools button:nth-child(4){display:block!important;left:39%!important;top:75%!important;width:9%!important;height:14%!important}
+.desk-tools button:nth-child(5){display:block!important;left:49%!important;top:75%!important;width:8%!important;height:14%!important}
+.desk-tools button:nth-child(6){display:block!important;left:58%!important;top:75%!important;width:9%!important;height:14%!important}
 .desk-tools button:focus-visible{opacity:1!important;outline:2px solid #d8a45c!important;outline-offset:-3px!important}
 /* Existing Bianca button also covers the visible bottom chat bar; higher-z desk/notices keep their own actions. */
-.bianca-hotspot{z-index:8!important;left:5%!important;top:23%!important;width:90%!important;height:73%!important;background:transparent!important;border:0!important;color:transparent!important;box-shadow:none!important}
+.bianca-hotspot{z-index:8!important;left:28%!important;top:15%!important;width:40%!important;height:82%!important;background:transparent!important;border:0!important;color:transparent!important;box-shadow:none!important}
 .bianca-hotspot span,.bianca-hotspot small{display:none!important}
-.notice-stack,.lux-office .mail-notice-stack{z-index:15!important;top:7%!important;right:2.5%!important;width:min(360px,26vw)!important;max-height:55dvh!important;overflow:auto!important;background:linear-gradient(180deg,rgba(10,10,10,.985),rgba(10,10,10,.985))!important}
+.notice-stack,.lux-office .mail-notice-stack{z-index:15!important;top:7%!important;right:2.5%!important;width:min(360px,26vw)!important;max-height:59dvh!important;overflow:auto!important;background:linear-gradient(180deg,rgba(10,10,10,.985),rgba(10,10,10,.985))!important}
 @media(max-width:900px){
  .lux-office{background-image:url('/bianca-office-mobile-final.jpg')!important;background-position:center center!important;background-size:contain!important;background-repeat:no-repeat!important}
  .bianca-hotspot{left:4%!important;top:23%!important;width:92%!important;height:74%!important}
