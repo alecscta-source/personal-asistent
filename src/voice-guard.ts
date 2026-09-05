@@ -20,6 +20,7 @@ if (typeof window !== 'undefined' && !window.__biancaVoiceGuardInstalled) {
 
     proto.start = function (...args: any[]) {
       window.__biancaMicActive = true
+      try{this.addEventListener('end',()=>{window.__biancaMicActive=false},{once:true})}catch{}
       return originalStart.apply(this, args)
     }
     proto.stop = function (...args: any[]) {
@@ -36,9 +37,11 @@ if (typeof window !== 'undefined' && !window.__biancaVoiceGuardInstalled) {
     const synth = window.speechSynthesis
     const originalSpeak = synth.speak.bind(synth)
     synth.speak = ((utterance: SpeechSynthesisUtterance) => {
-      // Cât timp utilizatorul dictează, Bianca nu vorbește peste el și nu își
-      // poate recunoaște propria voce ca o comandă nouă. Pauzele rămân pauze.
-      if (window.__biancaMicActive) return
+      // În timpul unei note Bianca rămâne complet tăcută. Nota se citește
+      // numai la o acțiune explicită a utilizatorului după ieșirea din mod Notă.
+      const noteOpen=!!document.querySelector('.note-live')
+      if (window.__biancaMicActive || noteOpen) return
+      utterance.lang='ro-RO'
       originalSpeak(utterance)
     }) as typeof synth.speak
   }
