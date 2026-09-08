@@ -1,7 +1,6 @@
 import { supabase } from './supabase'
 export type BiancaUiState={attention:any[];agents:any[];tasks:any[];approvals:any[];calendar:any[];promises:any[]}
 export type PrincipalContext={user_id?:string;display_name?:string;email?:string;founder_of?:string;specialization?:string;companies?:any[]}
-export type OrthodoxDay={date:string;year:number;day:number;month:number;feast:string;detail?:string;source:string;source_url:string;official_calendar_url:string;time_zone:string}
 export const emptyState:BiancaUiState={attention:[],agents:[],tasks:[],approvals:[],calendar:[],promises:[]}
 export async function getSession(){if(!supabase)return null;return (await supabase.auth.getSession()).data.session}
 export async function signInWithPassword(email:string,password:string){
@@ -28,7 +27,6 @@ export async function getBiancaTaskResults(){if(!supabase)return[];const{data,er
 export async function getBiancaRecentDecisions(){if(!supabase)return[];const{data,error}=await supabase.rpc('get_bianca_recent_decisions');if(error)throw error;return(data??[])as any[]}
 export async function getBiancaTaskTimeline(taskId:string){if(!supabase)return{};const{data,error}=await supabase.rpc('get_bianca_task_timeline',{p_task_id:taskId});if(error)throw error;return(data??{})as any}
 export async function getBiancaConversationFeed(limit=60){if(!supabase)return[];const{data,error}=await supabase.rpc('get_bianca_conversation_feed',{p_limit:limit});if(error)throw error;return(data??[])as any[]}
-export async function getOrthodoxDay(date?:string):Promise<OrthodoxDay|null>{if(!supabase)return null;const{data,error}=await supabase.functions.invoke('orthodox-calendar-v1',{body:date?{date}:{}});if(error)throw error;return(data??null)as OrthodoxDay|null}
 export async function snoozeAttention(taskId:string,minutes=60){if(!supabase)throw new Error('Supabase nu este configurat');const{error}=await supabase.rpc('snooze_bianca_attention',{p_task_id:taskId,p_minutes:minutes});if(error)throw error}
 export async function decideApproval(id:string,status:'approved'|'rejected'|'revision_requested'){if(!supabase)throw new Error('Supabase nu este configurat');const{data,error}=await supabase.rpc('decide_bianca_approval',{p_id:id,p_status:status});if(error)throw error;return data}
 export async function submitMessage(message:string,agent='personal_assistant'){if(!supabase)throw new Error('Supabase nu este configurat');const{data,error}=await supabase.rpc('submit_bianca_message',{p_message:message,p_agent:agent});if(error)throw error;return data as string}
