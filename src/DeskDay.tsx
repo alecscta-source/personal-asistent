@@ -21,11 +21,17 @@ export default function DeskDay(){
  const first=(new Date(current.year,current.month-1,1).getDay()+6)%7
  const days=new Date(current.year,current.month,0).getDate()
  const cells=Array.from({length:42},(_,i)=>{const n=i-first+1;return n>=1&&n<=days?n:null})
- return createPortal(<div className="desk-live-calendar" aria-label={`${current.weekday}, ${current.day} ${current.monthName} ${current.year}`}>
+ const openCalendar=()=>{
+  const native=document.querySelector('.desk-tools button:nth-child(2)') as HTMLButtonElement|null
+  if(native){native.click();return}
+  history.pushState({view:'calendar'},'','#calendar')
+  window.dispatchEvent(new PopStateEvent('popstate',{state:{view:'calendar'}}))
+ }
+ return createPortal(<button type="button" className="desk-live-calendar" onClick={openCalendar} aria-label={`Deschide calendarul. Astăzi este ${current.weekday}, ${current.day} ${current.monthName} ${current.year}`} title="Deschide Calendar">
    <div className="desk-live-month">{current.monthName} <span>{current.year}</span></div>
    <div className="desk-live-weekday">{current.weekday}</div>
    <div className="desk-live-day">{String(current.day).padStart(2,'0')}</div>
    <div className="desk-live-grid-head"><span>L</span><span>Ma</span><span>Mi</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
    <div className="desk-live-grid">{cells.map((n,i)=><span key={i} className={n===current.day?'today':''}>{n||''}</span>)}</div>
- </div>,target)
+ </button>,target)
 }
