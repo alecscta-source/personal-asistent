@@ -1,40 +1,41 @@
-/* HOME final interaction layer — preserve backend and secondary pages. */
+/* HOME interaction layer. Background artwork contains the visual controls; HTML stays live and covers only dynamic regions. */
+:root{--office-bgw:max(100vw,177.7778dvh);--office-bgh:max(56.25vw,100dvh)}
 .app-shell:has(.office-v2){display:block!important;width:100vw!important;min-height:100dvh!important;overflow:hidden!important}
 .app-shell:has(.office-v2)>.sidebar,.app-shell:has(.office-v2)>.mobile-nav,.main-panel:has(.office-v2)>.topbar{display:none!important}
 .main-panel:has(.office-v2),.office-v2{margin:0!important;padding:0!important;width:100vw!important;min-height:100dvh!important;background:#050403!important}
-.lux-office{position:relative!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;border:0!important;border-radius:0!important;box-shadow:none!important;background-color:#080604!important;background-image:url('/bianca-office-desktop-final.png.png')!important;background-position:center center!important;background-repeat:no-repeat!important;background-size:cover!important}
+.lux-office{position:relative!important;width:100vw!important;height:100dvh!important;min-height:100dvh!important;overflow:hidden!important;border:0!important;border-radius:0!important;box-shadow:none!important;background-color:#080604!important;background-image:url('/bianca-office-desktop-final.png.png?v=20260914-office2')!important;background-position:center center!important;background-repeat:no-repeat!important;background-size:cover!important}
 .desk-tools{display:contents!important}
-.desk-tools button{position:absolute!important;z-index:12!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:transparent!important;overflow:hidden!important;min-width:0!important;min-height:0!important;border-radius:18px!important;opacity:0!important;cursor:pointer!important;transform:none!important}
+.desk-tools button{position:absolute!important;z-index:24!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:transparent!important;overflow:hidden!important;min-width:0!important;min-height:0!important;border-radius:18px!important;opacity:0!important;cursor:pointer!important;transform:none!important;pointer-events:auto!important}
 .desk-tools button:before,.desk-tools button:after,.desk-tools button svg,.desk-tools button span{display:none!important}
-.desk-tools button:nth-child(1){display:block!important;left:27%!important;top:57%!important;width:27%!important;height:20%!important}
-.desk-tools button:nth-child(2){display:block!important;left:56%!important;top:53%!important;width:13%!important;height:20%!important}
-.desk-tools button:nth-child(3){display:block!important;left:29%!important;top:75%!important;width:9%!important;height:14%!important}
-.desk-tools button:nth-child(4){display:block!important;left:39%!important;top:75%!important;width:9%!important;height:14%!important}
-.desk-tools button:nth-child(5){display:block!important;left:49%!important;top:75%!important;width:8%!important;height:14%!important}
-.desk-tools button:nth-child(6){display:block!important;left:58%!important;top:75%!important;width:9%!important;height:14%!important}
 .desk-tools button:focus-visible{opacity:1!important;outline:2px solid #d8a45c!important;outline-offset:-3px!important}
-/* Existing Bianca button also covers the visible bottom chat bar; higher-z desk/notices keep their own actions. */
-.bianca-hotspot{z-index:8!important;left:28%!important;top:15%!important;width:40%!important;height:82%!important;background:transparent!important;border:0!important;color:transparent!important;box-shadow:none!important}
+/* Desktop: Agenda and live Calendar are on the desk; Camera/Files/Voice/Team exist only in the left stack. */
+.desk-tools button:nth-child(1){left:calc((100vw - var(--office-bgw))/2 + .269*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .620*var(--office-bgh))!important;width:calc(.310*var(--office-bgw))!important;height:calc(.145*var(--office-bgh))!important}
+.desk-tools button:nth-child(2){left:calc((100vw - var(--office-bgw))/2 + .599*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .530*var(--office-bgh))!important;width:calc(.162*var(--office-bgw))!important;height:calc(.232*var(--office-bgh))!important}
+.desk-tools button:nth-child(4){left:calc((100vw - var(--office-bgw))/2 + .009*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .101*var(--office-bgh))!important;width:calc(.060*var(--office-bgw))!important;height:calc(.097*var(--office-bgh))!important}
+.desk-tools button:nth-child(3){left:calc((100vw - var(--office-bgw))/2 + .009*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .209*var(--office-bgh))!important;width:calc(.060*var(--office-bgw))!important;height:calc(.098*var(--office-bgh))!important}
+.desk-tools button:nth-child(5){left:calc((100vw - var(--office-bgw))/2 + .009*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .325*var(--office-bgh))!important;width:calc(.060*var(--office-bgw))!important;height:calc(.092*var(--office-bgh))!important}
+.desk-tools button:nth-child(6){left:calc((100vw - var(--office-bgw))/2 + .009*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .430*var(--office-bgh))!important;width:calc(.060*var(--office-bgw))!important;height:calc(.092*var(--office-bgh))!important}
+/* Clicking Bianca herself opens the dedicated chat; this hotspot never covers the bottom command bar. */
+.bianca-hotspot{position:absolute!important;z-index:10!important;left:calc((100vw - var(--office-bgw))/2 + .350*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .105*var(--office-bgh))!important;width:calc(.245*var(--office-bgw))!important;height:calc(.500*var(--office-bgh))!important;background:transparent!important;border:0!important;color:transparent!important;box-shadow:none!important;pointer-events:auto!important}
 .bianca-hotspot span,.bianca-hotspot small{display:none!important}
-.notice-stack,.lux-office .mail-notice-stack{z-index:15!important;top:7%!important;right:2.5%!important;width:min(360px,26vw)!important;max-height:59dvh!important;overflow:auto!important;background:linear-gradient(180deg,rgba(10,10,10,.985),rgba(10,10,10,.985))!important}
+/* Live inbox completely covers the notification artwork underneath, preventing doubles. */
+.notice-stack,.lux-office .mail-notice-stack{position:absolute!important;z-index:30!important;left:calc((100vw - var(--office-bgw))/2 + .776*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .016*var(--office-bgh))!important;width:calc(.204*var(--office-bgw))!important;height:calc(.372*var(--office-bgh))!important;max-height:none!important;box-sizing:border-box!important;overflow:auto!important;padding:50px 12px 12px!important;gap:8px!important;border:1px solid rgba(210,170,100,.24)!important;border-radius:24px!important;background:#111417!important;box-shadow:0 14px 40px rgba(0,0,0,.38)!important;pointer-events:auto!important}
+.notice-stack:before,.lux-office .mail-notice-stack:before{top:15px!important;left:18px!important;font-size:1rem!important}
+.lux-office .mail-notice{min-height:0!important;padding:10px!important;border-radius:13px!important}
+.mail-one-line{gap:7px!important}.mail-one-line svg{width:16px!important;height:16px!important}.mail-one-line strong{font-size:.72rem!important;line-height:1.2!important}
 @media(max-width:900px){
- .lux-office{background-image:url('/bianca-office-mobile-final.jpg.png')!important;background-position:center center!important;background-size:contain!important;background-repeat:no-repeat!important}
- .bianca-hotspot{left:16%!important;top:27%!important;width:72%!important;height:66%!important}
- .notice-stack,.lux-office .mail-notice-stack{top:2.4%!important;right:2.8%!important;width:37vw!important;max-width:none!important;max-height:24dvh!important;padding:38px 7px 7px!important;gap:6px!important;border-radius:14px!important;background:rgba(10,10,10,.99)!important}
- .notice-stack:before,.lux-office .mail-notice-stack:before{top:11px!important;left:11px!important;font-size:.84rem!important}
- .lux-office .mail-notice{min-height:0!important;padding:8px!important;border-radius:11px!important}
- .mail-one-line{gap:6px!important}.mail-one-line svg{width:15px!important;height:15px!important}.mail-one-line strong{font-size:.63rem!important;line-height:1.22!important}
- /* Agenda + calendar remain on the photographed desk. */
- .desk-tools button:nth-child(1){left:19%!important;top:69%!important;width:49%!important;height:15%!important}
- .desk-tools button:nth-child(2){left:70%!important;top:59%!important;width:27%!important;height:16%!important}
- /* Left mobile stack, top to bottom: Camera, Files, Voice, Team. */
- .desk-tools button:nth-child(4){left:2.5%!important;top:17.4%!important;width:12.5%!important;height:7.2%!important}
- .desk-tools button:nth-child(3){left:2.5%!important;top:24.6%!important;width:12.5%!important;height:7.2%!important}
- .desk-tools button:nth-child(5){left:2.5%!important;top:31.8%!important;width:12.5%!important;height:7.2%!important}
- .desk-tools button:nth-child(6){left:2.5%!important;top:39.0%!important;width:12.5%!important;height:7.2%!important}
+ :root{--office-bgw:max(100vw,56.25dvh);--office-bgh:max(177.7778vw,100dvh)}
+ .lux-office{background-image:url('/bianca-office-mobile-final.jpg.png?v=20260914-office2')!important;background-position:center center!important;background-size:cover!important;background-repeat:no-repeat!important}
+ .bianca-hotspot{left:calc((100vw - var(--office-bgw))/2 + .195*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .280*var(--office-bgh))!important;width:calc(.535*var(--office-bgw))!important;height:calc(.385*var(--office-bgh))!important}
+ .notice-stack,.lux-office .mail-notice-stack{left:calc((100vw - var(--office-bgw))/2 + .606*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .015*var(--office-bgh))!important;width:calc(.360*var(--office-bgw))!important;height:calc(.225*var(--office-bgh))!important;max-height:none!important;padding:38px 7px 7px!important;gap:5px!important;border-radius:18px!important}
+ .notice-stack:before,.lux-office .mail-notice-stack:before{top:11px!important;left:12px!important;font-size:.8rem!important}
+ .lux-office .mail-notice{padding:7px!important;border-radius:10px!important}.mail-one-line{gap:5px!important}.mail-one-line svg{width:14px!important;height:14px!important}.mail-one-line strong{font-size:.58rem!important;line-height:1.15!important}
+ /* Mobile source artwork uses the same left-only control stack. */
+ .desk-tools button:nth-child(1){left:calc((100vw - var(--office-bgw))/2 + .205*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .692*var(--office-bgh))!important;width:calc(.525*var(--office-bgw))!important;height:calc(.115*var(--office-bgh))!important}
+ .desk-tools button:nth-child(2){left:calc((100vw - var(--office-bgw))/2 + .710*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .598*var(--office-bgh))!important;width:calc(.265*var(--office-bgw))!important;height:calc(.153*var(--office-bgh))!important}
+ .desk-tools button:nth-child(4){left:calc((100vw - var(--office-bgw))/2 + .029*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .178*var(--office-bgh))!important;width:calc(.112*var(--office-bgw))!important;height:calc(.063*var(--office-bgh))!important}
+ .desk-tools button:nth-child(3){left:calc((100vw - var(--office-bgw))/2 + .029*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .246*var(--office-bgh))!important;width:calc(.112*var(--office-bgw))!important;height:calc(.063*var(--office-bgh))!important}
+ .desk-tools button:nth-child(5){left:calc((100vw - var(--office-bgw))/2 + .029*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .316*var(--office-bgh))!important;width:calc(.112*var(--office-bgw))!important;height:calc(.063*var(--office-bgh))!important}
+ .desk-tools button:nth-child(6){left:calc((100vw - var(--office-bgw))/2 + .029*var(--office-bgw))!important;top:calc((100dvh - var(--office-bgh))/2 + .385*var(--office-bgh))!important;width:calc(.112*var(--office-bgw))!important;height:calc(.063*var(--office-bgh))!important}
 }
-@media(max-width:900px) and (orientation:landscape){
- .lux-office{background-image:none!important;background:#080604!important}
- .lux-office>*{visibility:hidden!important;pointer-events:none!important}
- .lux-office:after{content:'Rotește telefonul vertical.';position:absolute!important;inset:0!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:24px!important;text-align:center!important;color:#e5c487!important;background:#080604!important;font-size:clamp(1.2rem,4vw,2rem)!important;font-weight:600!important;letter-spacing:.02em!important;z-index:999!important;visibility:visible!important}
-}
+/* Landscape phones are supported; do not blank the mobile office. */
